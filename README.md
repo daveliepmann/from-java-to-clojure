@@ -78,6 +78,45 @@ Idiomatic Clojure naming uses an exclamation point suffix to denote that the fun
   )
 ```
 
+---
+
+#### Java
+
+```java
+void doSomething(int... numbers) {
+   // logic here
+}
+```
+
+#### Clojure
+
+```clojure
+(defn do-something! [& xs]
+  ; side effects here
+  )
+```
+
+---
+
+#### Java
+
+```java
+int getScore() {
+   // logic here
+   return score;
+}
+```
+
+#### Clojure
+Idiomatic functional naming usually elides "get-" prefixes:
+
+```clojure
+(defn score []
+  ;; logic here
+  ;; no need for a separate name to "return" because the last value just gets returned
+  )
+```
+
 
 ## Conditionals
 
@@ -415,44 +454,6 @@ cars.stream().filter(car -> car.speed > 100).forEach(car -> System.out.println(c
 
 (map (comp println :speed)
   (filter #(> (:speed %) 100) cars))
-```
-
----
-
-#### Java
-
-```java
-void doSomething(int... numbers) {
-   // logic here
-}
-```
-
-#### Clojure
-
-```clojure
-(defn do-something! [& xs]
-  ; side effects here)
-```
-
----
-
-#### Java
-
-```java
-int getScore() {
-   // logic here
-   return score;
-}
-```
-
-#### Clojure
-Idiomatic functional naming usually elides "get-" prefixes:
-
-```clojure
-(defn score []
-  ;; logic here
-  ;; no need for a separate name to "return" because the last value just gets returned
-  )
 ```
 
 ---
