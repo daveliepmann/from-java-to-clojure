@@ -48,9 +48,9 @@ otherName = null;
 (declare other-name)
 (def other-name nil)
 ```
-Normally one wouldn't use `declare` except when doing something like creating mutually referent functions, which makes forward declarations necessary. 
+Normally one wouldn't use `declare` except when doing something like creating mutually referent functions, which make forward declarations necessary.
 
-But if we're creating this var as `nil` because we expect it to change, then we should think twice. More likely we should be either rethinking the structure of our program to be less imperative, or we should be using an atom:
+But if we're creating this var as `nil` because we expect it to change, we should think twice. More likely, we should either rethink the structure of our program to use an atom or be less imperative:
 
 ```clojure
 (def other-name (atom nil))
@@ -69,7 +69,7 @@ if (text != null) {
 ```
 
 #### Clojure
-It's somewhat unusual to conditionally define a var in Clojure, because it's quite imperative. To be idiomatic Clojure we'd just inline the `when-not` and omit the name `length`.
+It's somewhat unusual to conditionally define a var in Clojure because it's quite imperative. To be Clojure-idiomatic, we'd just inline the `when-not` and omit the name `length`.
 
 So technically a straight port would be:
 ```clojure
@@ -171,7 +171,7 @@ String message = "My name is: " + firstName + " " + lastName;
 ```
 
 #### Clojure
-Translating this one is a bit weird because the original has these variable names that come from nowhere. Probably we'd make it a function rather than a series of defined names.
+Translating this one is a bit weird because the original has these variable names that come from nowhere. We'd probably make it a function rather than a series of defined names.
 ```clojure
 (defn message [first-name last-name]
   (str "My name is: " first-name " " last-name))
