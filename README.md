@@ -1,5 +1,5 @@
 # From Java To Clojure
-From Java To Clojure - Your Cheat Sheet For Java To Clojure
+Your Cheat Sheet For Clojurizing Java
 
 ---
 
