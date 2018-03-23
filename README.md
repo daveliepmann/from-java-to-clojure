@@ -293,7 +293,12 @@ You can destructure, just like in `for` above:
   (do-some-side-effect! (inc v)))
 ```
 
-If you need to produce a side effect for a range of integers, [dotimes](http://clojuredocs.org/clojure.core/dotimes) is like `doseq` plus [range](http://clojuredocs.org/clojure.core/range):
+If you need to produce a side effect for a range of integers, you *could* use `doseq` like this:
+``` clojure
+(doseq [x (range 10)] 
+  (do-something! x))
+```
+...but [dotimes](http://clojuredocs.org/clojure.core/dotimes) is like `doseq` with a built-in [range](http://clojuredocs.org/clojure.core/range):
 ``` clojure
 (dotimes [x 9] 
   (do-something! x))
@@ -353,7 +358,7 @@ if (object instanceof Car) {
 #### Clojure
 
 ```clojure
-; Honestly casting is really unusual in Clojure since it is dynamically typed and not object-oriented
+; There isn't really an equivalent for this since Clojure is dynamically typed and not object-oriented
 ```
 
 ---
@@ -405,7 +410,8 @@ Idiomatic Clojure naming uses an exclamation point suffix to denote that the fun
 
 ```clojure
 (defn do-something! []
-  ; side effects here)
+  ; side effects here
+  )
 ```
 
 ---
