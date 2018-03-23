@@ -114,7 +114,7 @@ if (score >= 0 && score <= 300) { foo(); }
 ```clojure
 (if (and (>= score 0)
          (<= score 300))
-  (foo)
+  (foo))
 ```
 ---
 
