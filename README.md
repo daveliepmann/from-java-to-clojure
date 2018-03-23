@@ -98,7 +98,7 @@ String text = x > 5 ? "x > 5" : "x <= 5";
 (def text
   (if (> x 5) 
     "x > 5" 
-    "x <= 5"
+    "x <= 5"))
 ```
 
 ---
