@@ -15,6 +15,8 @@ Clojure
 (println"Amit Shekhar")
 ```
 
+---
+
 Java
 
 ```java
