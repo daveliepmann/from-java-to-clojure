@@ -1,7 +1,7 @@
 # From Java To Clojure
 Your Cheat Sheet For Clojurizing Java Syntax
 
-### Printing out
+## Printing out
 
 #### Java
 
@@ -17,7 +17,7 @@ System.out.println("Amit Shekhar");
 (println"Amit Shekhar")
 ```
 
-### Defining
+## Defining
 
 #### Java
 
@@ -58,7 +58,7 @@ But if we're creating this var as `nil` because we expect it to change, then we 
 
 ...and if `other-name` needs to mutate, we do so with `reset!` or `swap!`.
 
-### Conditionals
+## Conditionals
 
 #### Java
 
@@ -159,7 +159,7 @@ switch (score) {
 ```
 
 
-### Strings
+## Strings
 
 #### Java
 
@@ -197,7 +197,7 @@ String text = "First Line\n" +
        "Third Line"))
 ```
 
-### Bitwise Manipulation
+## Bitwise Manipulation
 
 #### Java
 
@@ -219,7 +219,7 @@ final int leftShift  = a << 2;
 (def left-shift (bit-shift-left a 2))
 ```
 
-### Objects
+## Objects
 
 #### Java
 
