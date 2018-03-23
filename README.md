@@ -80,7 +80,7 @@ So technically a straight port would be:
 ```
 ...but something like this, inline in some other statement, is more likely:
 ```clojure
-(when-not (nil? text)
+(when text
   (count text))
 ```
 
