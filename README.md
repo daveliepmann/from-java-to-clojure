@@ -393,6 +393,20 @@ final int leftShift  = a << 2;
 #### Java
 
 ```java
+ImageView imageView;
+```
+
+#### Clojure
+
+```clojure
+(ImageView.)
+```
+
+---
+
+#### Java
+
+```java
 if (object instanceof Car) {
 }
 Car car = (Car) object;
@@ -618,18 +632,4 @@ int result = Utils.triple(3);
 (defn triple [n] (* 3 n)
 
 (def result (triple 3))
-```
-
----
-
-#### Java
-
-```java
-ImageView imageView;
-```
-
-#### Clojure
-
-```clojure
-(ImageView.)
 ```
