@@ -1,32 +1,32 @@
 # From Java To Clojure
-Your Cheat Sheet For Clojurizing Java
+Your Cheat Sheet For Clojurizing Java Syntax
 
----
+### Printing out
 
-Java
+#### Java
 
 ```java
 System.out.print("Amit Shekhar");
 System.out.println("Amit Shekhar");
 ```
 
-Clojure
+#### Clojure
 
 ```clojure
 (prn "Amit Shekhar")
 (println"Amit Shekhar")
 ```
 
----
+### Defining
 
-Java
+#### Java
 
 ```java
 String name = "Amit Shekhar";
 final String name = "Amit Shekhar";
 ```
 
-Clojure
+#### Clojure
 
 ```clojure
 (def ^:private name "Amit Shekhar")
@@ -35,25 +35,32 @@ Clojure
 
 ---
 
-Java
+#### Java
 
 ```java
 String otherName;
 otherName = null;
 ```
 
-Clojure
+#### Clojure
 
 ```clojure
 (declare other-name)
 (def other-name nil)
 ```
+Normally one wouldn't use `declare` except when doing something like creating mutually referent functions, which makes forward declarations necessary. 
 
-Normally one wouldn't use `declare` except when doing something like creating mutually referent functions, which makes forward declarations necessary.
+But if we're creating this var as `nil` because we expect it to change, then we should think twice. More likely we should be either rethinking the structure of our program to be less imperative, or we should be using an atom:
 
----
+```clojure
+(def other-name (atom nil))
+```
 
-Java
+...and if `other-name` needs to mutate, we do so with `reset!` or `swap!`.
+
+### Conditionals
+
+#### Java
 
 ```java
 if (text != null) {
@@ -61,67 +68,31 @@ if (text != null) {
 }
 ```
 
-Clojure
+#### Clojure
+It's somewhat unusual to conditionally define a var in Clojure, because it's quite imperative. To be idiomatic Clojure we'd just inline the `when-not` and omit the name `length`.
 
+So technically a straight port would be:
 ```clojure
-(def length (if (nil? text)
-              nil
-              (count text)))
-
-;; or, more succinctly:
-(def length (when-not (nil? text)
-              (count text)))
+(def length
+  (if (nil? text)
+    nil
+    (count text)))
 ```
-
-Usually doing something like conditionally defining a var would be too imperative to be idiomatic Clojure anyway, and instead we'd just inline the `when-not` and not worry about the name `length`.
-
----
-
-Java
-
-```java
-String firstName = "Amit";
-String lastName = "Shekhar";
-String message = "My name is: " + firstName + " " + lastName;
-```
-
-Clojure
-
+...but something like this, inline in some other statement, is more likely:
 ```clojure
-(def message
-  (let [first-name "Amit"
-        last-name  "Shekhar"]
-    (str "My name is: " first-name " " last-name)))
+(when-not (nil? text)
+  (count text))
 ```
 
 ---
 
-Java
-
-```java
-String text = "First Line\n" +
-              "Second Line\n" +
-              "Third Line";
-```
-
-Clojure
-
-```clojure
-(def text 
-  (str "First Line\n" 
-       "Second Line\n" 
-       "Third Line"))
-```
-
----
-
-Java
+#### Java
 
 ```java
 String text = x > 5 ? "x > 5" : "x <= 5";
 ```
 
-Clojure
+#### Clojure
 
 ```clojure
 (def text
@@ -132,78 +103,21 @@ Clojure
 
 ---
 
-java
-
-```java
-final int andResult  = a & b;
-final int orResult   = a | b;
-final int xorResult  = a ^ b;
-final int rightShift = a >> 2;
-final int leftShift  = a << 2;
-```
-
-Clojure
-
-```clojure
-(def and-result (bit-and a b))
-(def or-result (bit-or a b)
-(def xor-result (bit-xor a b)
-(def right-shift (bit-shift-right a 2))
-(def left-shift (bit-shift-left a 2))
-```
-
----
-
-Java
-
-```java
-if (object instanceof Car) {
-}
-Car car = (Car) object;
-```
-
-Clojure
-
-```clojure
-(if (= (type object) Car))
-
-(def car (cast object Car)
-```
-
----
-
-Java
-
-```java
-if (object instanceof Car) {
-   Car car = (Car) object;
-}
-```
-
-Clojure
-
-```clojure
-; Honestly casting is really unusual in Clojure since it is dynamically typed and not object-oriented
-```
-
----
-
-Java
+#### Java
 
 ```java
 if (score >= 0 && score <= 300) { }
 ```
 
-Clojure
+#### Clojure
 
 ```clojure
 (if (and (>= score 0)
          (<= score 300)))
 ```
-
 ---
 
-Java
+#### Java
 
 ```java
 int score = // some score;
@@ -232,7 +146,7 @@ switch (score) {
 }
 ```
 
-Clojure
+#### Clojure
 
 ```clojure
 (let [score nil]
@@ -244,9 +158,104 @@ Clojure
     :default "Fail"
 ```
 
+
+### Strings
+
+#### Java
+
+```java
+String firstName = "Amit";
+String lastName = "Shekhar";
+String message = "My name is: " + firstName + " " + lastName;
+```
+
+#### Clojure
+Translating this one is a bit weird, because the original has these variable names that come from nowhere. Probably we'd make it a function rather than a series of defined names.
+```clojure
+(defn message [first-name last-name]
+  (str "My name is: " first-name " " last-name))
+  
+(message "Amit" "Shekhar")
+```
+
 ---
 
-Java
+#### Java
+
+```java
+String text = "First Line\n" +
+              "Second Line\n" +
+              "Third Line";
+```
+
+#### Clojure
+
+```clojure
+(def text 
+  (str "First Line\n" 
+       "Second Line\n" 
+       "Third Line"))
+```
+
+### Bitwise Manipulation
+
+#### Java
+
+```java
+final int andResult  = a & b;
+final int orResult   = a | b;
+final int xorResult  = a ^ b;
+final int rightShift = a >> 2;
+final int leftShift  = a << 2;
+```
+
+#### Clojure
+
+```clojure
+(def and-result (bit-and a b))
+(def or-result (bit-or a b)
+(def xor-result (bit-xor a b)
+(def right-shift (bit-shift-right a 2))
+(def left-shift (bit-shift-left a 2))
+```
+
+### Objects
+
+#### Java
+
+```java
+if (object instanceof Car) {
+}
+Car car = (Car) object;
+```
+
+#### Clojure
+
+```clojure
+(if (= (type object) Car))
+
+(def car (cast object Car)
+```
+
+---
+
+#### Java
+
+```java
+if (object instanceof Car) {
+   Car car = (Car) object;
+}
+```
+
+#### Clojure
+
+```clojure
+; Honestly casting is really unusual in Clojure since it is dynamically typed and not object-oriented
+```
+
+---
+
+#### Java
 
 ```java
 for (int i = 1; i <= 10 ; i++) { }
@@ -264,7 +273,7 @@ for (String item : collection) { }
 for (Map.Entry<String, String> entry: map.entrySet()) { }
 ```
 
-Clojure
+#### Clojure
 
 ```clojure
 (repeatedly 10 some-fn)
@@ -292,7 +301,7 @@ Clojure
 
 ---
 
-Java
+#### Java
 
 ```java
 final List<Integer> listOfNumber = Arrays.asList(1, 2, 3, 4);
@@ -310,7 +319,7 @@ final Map<Integer, String> keyValue = Map.of(1, "Amit",
                                              3, "Mindorks");
 ```
 
-Clojure
+#### Clojure
 
 ```clojure
 (def list-of-number [1 2 3 4])
@@ -322,7 +331,7 @@ Clojure
 
 ---
 
-Java
+#### Java
 
 ```java
 // Java 7 and below
@@ -344,7 +353,7 @@ for (Car car : cars) {
 cars.stream().filter(car -> car.speed > 100).forEach(car -> System.out.println(car.speed));
 ```
 
-Clojure
+#### Clojure
 
 ```clojure
 (doseq [car cars]
@@ -356,7 +365,7 @@ Clojure
 
 ---
 
-Java
+#### Java
 
 ```java
 void doSomething() {
@@ -364,7 +373,7 @@ void doSomething() {
 }
 ```
 
-Clojure
+#### Clojure
 Idiomatic Clojure naming uses an exclamation point suffix to denote that the function is impure (it "does something" elsewhere rather than returning a value). Use of side effects is minimized in the functional style.
 
 ```clojure
@@ -374,7 +383,7 @@ Idiomatic Clojure naming uses an exclamation point suffix to denote that the fun
 
 ---
 
-Java
+#### Java
 
 ```java
 void doSomething(int... numbers) {
@@ -382,7 +391,7 @@ void doSomething(int... numbers) {
 }
 ```
 
-Clojure
+#### Clojure
 
 ```clojure
 (defn do-something! [& xs]
@@ -391,7 +400,7 @@ Clojure
 
 ---
 
-Java
+#### Java
 
 ```java
 int getScore() {
@@ -400,7 +409,7 @@ int getScore() {
 }
 ```
 
-Clojure
+#### Clojure
 Idiomatic functional naming usually elides "get-" prefixes:
 
 ```clojure
@@ -412,7 +421,7 @@ Idiomatic functional naming usually elides "get-" prefixes:
 
 ---
 
-Java
+#### Java
 
 ```java
 public class Utils {
@@ -428,7 +437,7 @@ public class Utils {
 }
 ```
 
-Clojure
+#### Clojure
 
 ```clojure
 (defn score [value] (* 2 value))
@@ -436,7 +445,7 @@ Clojure
 
 ---
 
-Java
+#### Java
 
 ```java
 public class Developer {
@@ -494,7 +503,7 @@ public class Developer {
 }
 ```
 
-Clojure
+#### Clojure
 
 ```clojure
 (defrecord Developer [name age])
@@ -503,7 +512,7 @@ Clojure
 
 ---
 
-Java
+#### Java
 
 ```java
 public class Developer implements Cloneable {
@@ -532,7 +541,7 @@ try {
 
 ```
 
-Clojure
+#### Clojure
 
 ```clojure
 (defrecord Developer [name age])
@@ -547,7 +556,7 @@ Clojure
 
 ---
 
-Java
+#### Java
 
 ```java
 public class Utils {
@@ -566,7 +575,7 @@ int result = Utils.triple(3);
 
 ```
 
-Clojure
+#### Clojure
 
 ```clojure
 (defn triple [n] (* 3 n)
@@ -576,30 +585,14 @@ Clojure
 
 ---
 
-Java
+#### Java
 
 ```java
 ImageView imageView;
 ```
 
-Clojure
+#### Clojure
 
 ```clojure
 (ImageView.)
 ```
-
-
----
-
-### Important things to know in Clojure
-- Functions
-- Data structures
-- Immutability
-- Connecting your editor to a REPL
-- Java interop
-- Clojurescript
-- Namespaces
-- `deftype`, `definterface`, `defrecord` for object-oriented programming
-- Atoms and binding for thread-safe mutability
-- clojure.spec
-
