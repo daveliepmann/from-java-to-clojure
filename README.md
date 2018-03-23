@@ -284,7 +284,8 @@ If you just need to produce a side effect some number of times, [repeatedly](htt
 
 If you need to produce a side effect for each value in a collection, try [doseq](http://clojuredocs.org/clojure.core/doseq):
 ```clojure
-(doseq [x coll])
+(doseq [x coll]
+  (do-some-side-effect! x))
 ```
 
 You can destructure, just like in `for` above:
