@@ -106,14 +106,15 @@ String text = x > 5 ? "x > 5" : "x <= 5";
 #### Java
 
 ```java
-if (score >= 0 && score <= 300) { }
+if (score >= 0 && score <= 300) { foo(); }
 ```
 
 #### Clojure
 
 ```clojure
 (if (and (>= score 0)
-         (<= score 300)))
+         (<= score 300))
+  (foo)
 ```
 ---
 
