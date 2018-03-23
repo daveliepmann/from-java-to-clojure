@@ -277,7 +277,7 @@ You can iterate over multiple collections, like with nested loops:
   (foo x y))
 ```
 
-If you need to produce a side effect just some number of times, [repeatedly](http://clojuredocs.org/clojure.core/repeatedly) is your jam:
+If you just need to produce a side effect some number of times, [repeatedly](http://clojuredocs.org/clojure.core/repeatedly) is your jam:
 ``` clojure
 (repeatedly 10 some-fn)
 ```
