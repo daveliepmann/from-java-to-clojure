@@ -14,7 +14,7 @@ System.out.println("Amit Shekhar");
 
 ```clojure
 (prn "Amit Shekhar")
-(println"Amit Shekhar")
+(println "Amit Shekhar")
 ```
 
 ## Defining
