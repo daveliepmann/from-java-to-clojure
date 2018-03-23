@@ -150,13 +150,13 @@ switch (score) {
 #### Clojure
 
 ```clojure
-(let [score nil]
+(let [score _] ;; replace underscore with actual score
   (cond
     (#{9 10} score) "Excellent"
     (>= 6 8 score) "Good"
     (#{4 5} score) "Ok"
     (>= 1 3 score) "Fail"
-    :default "Fail"
+    :default "Fail"))
 ```
 
 
