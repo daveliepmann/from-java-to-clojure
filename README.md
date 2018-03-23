@@ -270,7 +270,7 @@ You can [destructure](https://clojure.org/guides/destructuring) each value in a 
   (somefunc k v))
 ```
 
-You can iterate over multiple collections, like with nested loops:
+You can iterate over multiple collections, similar to nested loops in Java:
 ```clojure
 (for [x ['a 'b 'c] 
       y [1 2 3]]
