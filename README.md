@@ -579,11 +579,11 @@ try {
 ```clojure
 (defrecord Developer [name age])
 
-// cloning or copying
+;; cloning or copying
 (def dev (->Developer "Max" 30))
 (def dev2 dev)
-// in case you only want to copy selected properties
-(def dev2 (map->Developer {:age 25})
+;; in case you only want to copy selected properties
+(def dev3 (map->Developer {:age 25})
 
 ```
 
