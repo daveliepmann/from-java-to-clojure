@@ -1,8 +1,6 @@
 # From Java To Clojure
 Your Cheat Sheet For Clojurizing Java
 
----
-
 Java
 
 ```java
@@ -16,8 +14,6 @@ Clojure
 (prn "Amit Shekhar")
 (println"Amit Shekhar")
 ```
-
----
 
 Java
 
@@ -49,6 +45,8 @@ Clojure
 (def other-name nil)
 ```
 
+Normally one wouldn't use `declare` except when doing something like creating mutually referent functions, which makes forward declarations necessary.
+
 ---
 
 Java
@@ -62,8 +60,16 @@ if (text != null) {
 Clojure
 
 ```clojure
-(def length (if (nil? text) nil (count text)))
+(def length (if (nil? text)
+              nil
+              (count text)))
+
+;; or, more succinctly:
+(def length (when-not (nil? text)
+              (count text)))
 ```
+
+Usually doing something like conditionally defining a var would be too imperative to be idiomatic Clojure anyway, and instead we'd just inline the `when-not` and not worry about the name `length`.
 
 ---
 
@@ -78,9 +84,10 @@ String message = "My name is: " + firstName + " " + lastName;
 Clojure
 
 ```clojure
-(def first-name "Amit")
-(def last-name "Shekhar")
-(def message (str "My name is : " first-name " " last-name))
+(def message
+  (let [first-name "Amit"
+        last-name  "Shekhar"]
+    (str "My name is: " first-name " " last-name)))
 ```
 
 ---
@@ -108,9 +115,6 @@ Java
 
 ```java
 String text = x > 5 ? "x > 5" : "x <= 5";
-
-String message = null;
-log(message != null ? message : "");
 ```
 
 Clojure
@@ -120,8 +124,6 @@ Clojure
   (if (> x 5) 
     "x > 5" 
     "x <= 5"
-(def message nil)
-(if message (log message) (log ""))
 ```
 
 ---
@@ -191,7 +193,8 @@ if (score >= 0 && score <= 300) { }
 Clojure
 
 ```clojure
-(if (and (>= score 0) (<= score 300)))
+(if (and (>= score 0)
+         (<= score 300)))
 ```
 
 ---
@@ -358,10 +361,11 @@ void doSomething() {
 ```
 
 Clojure
+Idiomatic Clojure naming uses an exclamation point suffix to denote that the function is impure (it "does something" elsewhere rather than returning a value). Use of side effects is minimized in the functional style.
 
 ```clojure
-(defn do-something []
-  ; logic here)
+(defn do-something! []
+  ; side effects here)
 ```
 
 ---
@@ -377,8 +381,8 @@ void doSomething(int... numbers) {
 Clojure
 
 ```clojure
-(defn do-something [& xs]
-  ; logic here)
+(defn do-something! [& xs]
+  ; side effects here)
 ```
 
 ---
@@ -393,33 +397,13 @@ int getScore() {
 ```
 
 Clojure
+Idiomatic functional naming usually elides "get-" prefixes:
 
 ```clojure
-(defn get-score []
-  ; logic here
-  score)
-```
-
----
-
-Java
-
-```java
-int getScore(int value) {
-    // logic here
-    return 2 * value;
-}
-```
-
-Clojure
-
-```clojure
-(defn get-score [value] 
-  ; logic here
-  (* 2 value))
-
-; as a partially applied function definition
-(def get-score (partial * 2))
+(defn score []
+  ;; logic here
+  ;; no need for a separate name to "return" because the last value just gets returned
+  )
 ```
 
 ---
@@ -443,7 +427,7 @@ public class Utils {
 Clojure
 
 ```clojure
-(defn get-score [value] (* 2 value))
+(defn score [value] (* 2 value))
 ```
 
 ---
