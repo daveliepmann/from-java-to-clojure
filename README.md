@@ -58,6 +58,27 @@ But if we're creating this var as `nil` because we expect it to change, we shoul
 
 ...and if `other-name` needs to mutate, we do so with `reset!` or `swap!`.
 
+
+## Methods to Functions
+
+#### Java
+
+```java
+void doSomething() {
+   // logic here
+}
+```
+
+#### Clojure
+Idiomatic Clojure naming uses an exclamation point suffix to denote that the function is impure (it "does something" elsewhere rather than returning a value). Use of side effects is minimized in the functional style.
+
+```clojure
+(defn do-something! []
+  ; side effects here
+  )
+```
+
+
 ## Conditionals
 
 #### Java
@@ -394,25 +415,6 @@ cars.stream().filter(car -> car.speed > 100).forEach(car -> System.out.println(c
 
 (map (comp println :speed)
   (filter #(> (:speed %) 100) cars))
-```
-
----
-
-#### Java
-
-```java
-void doSomething() {
-   // logic here
-}
-```
-
-#### Clojure
-Idiomatic Clojure naming uses an exclamation point suffix to denote that the function is impure (it "does something" elsewhere rather than returning a value). Use of side effects is minimized in the functional style.
-
-```clojure
-(defn do-something! []
-  ; side effects here
-  )
 ```
 
 ---
