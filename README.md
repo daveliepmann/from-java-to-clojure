@@ -171,7 +171,7 @@ String message = "My name is: " + firstName + " " + lastName;
 ```
 
 #### Clojure
-Translating this one is a bit weird, because the original has these variable names that come from nowhere. Probably we'd make it a function rather than a series of defined names.
+Translating this one is a bit weird because the original has these variable names that come from nowhere. Probably we'd make it a function rather than a series of defined names.
 ```clojure
 (defn message [first-name last-name]
   (str "My name is: " first-name " " last-name))
