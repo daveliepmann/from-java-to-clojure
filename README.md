@@ -69,7 +69,7 @@ if (text != null) {
 ```
 
 #### Clojure
-It's somewhat unusual to conditionally define a var in Clojure because it's quite imperative. To be Clojure-idiomatic, we'd just inline the `when-not` and omit the name `length`.
+It's somewhat unusual to conditionally define a var in Clojure because it's quite imperative. To be Clojure-idiomatic, we'd just inline it and omit the name `length`.
 
 So technically a straight port would be:
 ```clojure
