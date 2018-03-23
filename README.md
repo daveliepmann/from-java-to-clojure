@@ -1,16 +1,16 @@
 # From Java To Clojure
-> From Java To Clojure - Your Cheat Sheet For Java To Clojure
+From Java To Clojure - Your Cheat Sheet For Java To Clojure
 
 ---
 
-> Java
+Java
 
 ```java
 System.out.print("Amit Shekhar");
 System.out.println("Amit Shekhar");
 ```
 
-> Clojure
+Clojure
 
 ```clojure
 (prn "Amit Shekhar")
@@ -19,14 +19,14 @@ System.out.println("Amit Shekhar");
 
 ---
 
-> Java
+Java
 
 ```java
 String name = "Amit Shekhar";
 final String name = "Amit Shekhar";
 ```
 
-> Clojure
+Clojure
 
 ```clojure
 (def- name "Amit Shekhar")
@@ -35,14 +35,14 @@ final String name = "Amit Shekhar";
 
 ---
 
-> Java
+Java
 
 ```java
 String otherName;
 otherName = null;
 ```
 
-> Clojure
+Clojure
 
 ```clojure
 (declare other-name)
@@ -51,7 +51,7 @@ otherName = null;
 
 ---
 
-> Java
+Java
 
 ```java
 if (text != null) {
@@ -59,7 +59,7 @@ if (text != null) {
 }
 ```
 
-> Clojure
+Clojure
 
 ```clojure
 (def length (if (nil? text) nil (count text)))
@@ -67,7 +67,7 @@ if (text != null) {
 
 ---
 
-> Java
+Java
 
 ```java
 String firstName = "Amit";
@@ -75,7 +75,7 @@ String lastName = "Shekhar";
 String message = "My name is: " + firstName + " " + lastName;
 ```
 
-> Clojure
+Clojure
 
 ```clojure
 (def first-name "Amit")
@@ -85,7 +85,7 @@ String message = "My name is: " + firstName + " " + lastName;
 
 ---
 
-> Java
+Java
 
 ```java
 String text = "First Line\n" +
@@ -93,7 +93,7 @@ String text = "First Line\n" +
               "Third Line";
 ```
 
-> Clojure
+Clojure
 
 ```clojure
 (def text 
@@ -104,7 +104,7 @@ String text = "First Line\n" +
 
 ---
 
-> Java
+Java
 
 ```java
 String text = x > 5 ? "x > 5" : "x <= 5";
@@ -113,7 +113,7 @@ String message = null;
 log(message != null ? message : "");
 ```
 
-> Clojure
+Clojure
 
 ```clojure
 (def text
@@ -126,7 +126,7 @@ log(message != null ? message : "");
 
 ---
 
-> java
+java
 
 ```java
 final int andResult  = a & b;
@@ -136,7 +136,7 @@ final int rightShift = a >> 2;
 final int leftShift  = a << 2;
 ```
 
-> Clojure
+Clojure
 
 ```clojure
 (def and-result (bit-and a b))
@@ -148,7 +148,7 @@ final int leftShift  = a << 2;
 
 ---
 
-> Java
+Java
 
 ```java
 if (object instanceof Car) {
@@ -156,7 +156,7 @@ if (object instanceof Car) {
 Car car = (Car) object;
 ```
 
-> Clojure
+Clojure
 
 ```clojure
 (if (= (type object) Car))
@@ -166,7 +166,7 @@ Car car = (Car) object;
 
 ---
 
-> Java
+Java
 
 ```java
 if (object instanceof Car) {
@@ -174,7 +174,7 @@ if (object instanceof Car) {
 }
 ```
 
-> Clojure
+Clojure
 
 ```clojure
 ; Honestly casting is really unusual in Clojure since it is dynamically typed and not object-oriented
@@ -182,13 +182,13 @@ if (object instanceof Car) {
 
 ---
 
-> Java
+Java
 
 ```java
 if (score >= 0 && score <= 300) { }
 ```
 
-> Clojure
+Clojure
 
 ```clojure
 (if (and (>= score 0) (<= score 300)))
@@ -196,7 +196,7 @@ if (score >= 0 && score <= 300) { }
 
 ---
 
-> Java
+Java
 
 ```java
 int score = // some score;
@@ -225,7 +225,7 @@ switch (score) {
 }
 ```
 
-> Clojure
+Clojure
 
 ```clojure
 (let [score nil]
@@ -239,7 +239,7 @@ switch (score) {
 
 ---
 
-> Java
+Java
 
 ```java
 for (int i = 1; i <= 10 ; i++) { }
@@ -257,7 +257,7 @@ for (String item : collection) { }
 for (Map.Entry<String, String> entry: map.entrySet()) { }
 ```
 
-> Clojure
+Clojure
 
 ```clojure
 (repeatedly 10 some-fn)
@@ -285,7 +285,7 @@ for (Map.Entry<String, String> entry: map.entrySet()) { }
 
 ---
 
-> Java
+Java
 
 ```java
 final List<Integer> listOfNumber = Arrays.asList(1, 2, 3, 4);
@@ -303,7 +303,7 @@ final Map<Integer, String> keyValue = Map.of(1, "Amit",
                                              3, "Mindorks");
 ```
 
-> Clojure
+Clojure
 
 ```clojure
 (def list-of-number [1 2 3 4])
@@ -315,7 +315,7 @@ final Map<Integer, String> keyValue = Map.of(1, "Amit",
 
 ---
 
-> Java
+Java
 
 ```java
 // Java 7 and below
@@ -337,7 +337,7 @@ for (Car car : cars) {
 cars.stream().filter(car -> car.speed > 100).forEach(car -> System.out.println(car.speed));
 ```
 
-> Clojure
+Clojure
 
 ```clojure
 (doseq [car cars]
@@ -349,7 +349,7 @@ cars.stream().filter(car -> car.speed > 100).forEach(car -> System.out.println(c
 
 ---
 
-> Java
+Java
 
 ```java
 void doSomething() {
@@ -357,7 +357,7 @@ void doSomething() {
 }
 ```
 
-> Clojure
+Clojure
 
 ```clojure
 (defn do-something []
@@ -366,7 +366,7 @@ void doSomething() {
 
 ---
 
-> Java
+Java
 
 ```java
 void doSomething(int... numbers) {
@@ -374,7 +374,7 @@ void doSomething(int... numbers) {
 }
 ```
 
-> Clojure
+Clojure
 
 ```clojure
 (defn do-something [& xs]
@@ -383,7 +383,7 @@ void doSomething(int... numbers) {
 
 ---
 
-> Java
+Java
 
 ```java
 int getScore() {
@@ -392,7 +392,7 @@ int getScore() {
 }
 ```
 
-> Clojure
+Clojure
 
 ```clojure
 (defn get-score []
@@ -402,7 +402,7 @@ int getScore() {
 
 ---
 
-> Java
+Java
 
 ```java
 int getScore(int value) {
@@ -411,7 +411,7 @@ int getScore(int value) {
 }
 ```
 
-> Clojure
+Clojure
 
 ```clojure
 (defn get-score [value] 
@@ -424,7 +424,7 @@ int getScore(int value) {
 
 ---
 
-> Java
+Java
 
 ```java
 public class Utils {
@@ -440,7 +440,7 @@ public class Utils {
 }
 ```
 
-> Clojure
+Clojure
 
 ```clojure
 (defn get-score [value] (* 2 value))
@@ -448,7 +448,7 @@ public class Utils {
 
 ---
 
-> Java
+Java
 
 ```java
 public class Developer {
@@ -506,7 +506,7 @@ public class Developer {
 }
 ```
 
-> Clojure
+Clojure
 
 ```clojure
 (defrecord Developer [name age])
@@ -515,7 +515,7 @@ public class Developer {
 
 ---
 
-> Java
+Java
 
 ```java
 public class Developer implements Cloneable {
@@ -544,7 +544,7 @@ try {
 
 ```
 
-> Clojure
+Clojure
 
 ```clojure
 (defrecord Developer [name age])
@@ -559,7 +559,7 @@ try {
 
 ---
 
-> Java
+Java
 
 ```java
 public class Utils {
@@ -578,7 +578,7 @@ int result = Utils.triple(3);
 
 ```
 
-> Clojure
+Clojure
 
 ```clojure
 (defn triple [n] (* 3 n)
@@ -588,13 +588,13 @@ int result = Utils.triple(3);
 
 ---
 
-> Java
+Java
 
 ```java
 ImageView imageView;
 ```
 
-> Clojure
+Clojure
 
 ```clojure
 (ImageView.)
