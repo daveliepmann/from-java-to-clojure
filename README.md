@@ -197,6 +197,108 @@ String text = "First Line\n" +
        "Third Line"))
 ```
 
+## Data Literals
+
+#### Java
+
+```java
+final List<Integer> listOfNumber = Arrays.asList(1, 2, 3, 4);
+
+final Map<Integer, String> keyValue = new HashMap<Integer, String>();
+map.put(1, "Amit");
+map.put(2, "Ali");
+map.put(3, "Mindorks");
+
+// Java 9
+final List<Integer> listOfNumber = List.of(1, 2, 3, 4);
+
+final Map<Integer, String> keyValue = Map.of(1, "Amit",
+                                             2, "Ali",
+                                             3, "Mindorks");
+```
+
+#### Clojure
+
+```clojure
+(def list-of-number [1 2 3 4])
+
+(def key-value {1 "Amit" 
+                2 "Ali" 
+                3 "Mindorks"})
+```
+
+## What to do with Java loops
+
+#### Java
+
+```java
+for (int i = 1; i <= 10 ; i++) { }
+
+for (int i = 1; i < 10 ; i++) { }
+
+for (int i = 10; i >= 0 ; i--) { }
+
+for (int i = 1; i <= 10 ; i+=2) { }
+
+for (int i = 10; i >= 0 ; i-=2) { }
+
+for (String item : collection) { }
+
+for (Map.Entry<String, String> entry: map.entrySet()) { }
+```
+
+#### Clojure
+Translating a Java loop to Clojure has a lot of options, and choosing between them depends on *why* you're looping in the first place.
+
+Recursion is handy:
+```clojure
+(loop [x 10]
+  (when-not (= x 0)
+    (recur (- x 2))
+```
+
+You may want to calculate a value *for* every value in some collection(s):
+```clojure
+(for [x coll])
+  (calculate-y x))
+```
+
+You can [destructure](https://clojure.org/guides/destructuring) each value in a collection as you iterate over it:
+```clojure
+(for [[k v] map]
+  (somefunc k v))
+```
+
+You can iterate over multiple collections, like with nested loops:
+```clojure
+(for [x ['a 'b 'c] 
+      y [1 2 3]]
+  (foo x y))
+```
+
+If you need to produce a side effect just some number of times, [repeatedly](http://clojuredocs.org/clojure.core/repeatedly) is your jam:
+``` clojure
+(repeatedly 10 some-fn)
+```
+
+If you need to produce a side effect for each value in a collection, try [doseq](http://clojuredocs.org/clojure.core/doseq):
+```clojure
+(doseq [x coll])
+```
+
+You can destructure, just like in `for` above:
+```clojure
+(doseq [[k v] {:one 1}]
+  (do-some-side-effect! (inc v)))
+```
+
+If you need to produce a side effect for a range of integers, [dotimes](http://clojuredocs.org/clojure.core/dotimes) is like `doseq` plus [range](http://clojuredocs.org/clojure.core/range):
+``` clojure
+(dotimes [x 9] 
+  (do-something! x))
+```
+
+
 ## Bitwise Manipulation
 
 #### Java
@@ -251,82 +353,6 @@ if (object instanceof Car) {
 
 ```clojure
 ; Honestly casting is really unusual in Clojure since it is dynamically typed and not object-oriented
-```
-
----
-
-#### Java
-
-```java
-for (int i = 1; i <= 10 ; i++) { }
-
-for (int i = 1; i < 10 ; i++) { }
-
-for (int i = 10; i >= 0 ; i--) { }
-
-for (int i = 1; i <= 10 ; i+=2) { }
-
-for (int i = 10; i >= 0 ; i-=2) { }
-
-for (String item : collection) { }
-
-for (Map.Entry<String, String> entry: map.entrySet()) { }
-```
-
-#### Clojure
-
-```clojure
-(repeatedly 10 some-fn)
-
-(dotimes [x 9] 
-  (some-fn x)
-
-(loop [x 10]
-  (when-not (= x 0)
-    (recur (- x 2))
-
-(doseq [x coll])
-
-(doseq [[k v] map])
-
-(for [x coll]))
-
-(for [[k v] map]
-  (somefunc k v))
-
-(for [x ['a 'b 'c] 
-      y [1 2 3]]
-  (println x y)
-```
-
----
-
-#### Java
-
-```java
-final List<Integer> listOfNumber = Arrays.asList(1, 2, 3, 4);
-
-final Map<Integer, String> keyValue = new HashMap<Integer, String>();
-map.put(1, "Amit");
-map.put(2, "Ali");
-map.put(3, "Mindorks");
-
-// Java 9
-final List<Integer> listOfNumber = List.of(1, 2, 3, 4);
-
-final Map<Integer, String> keyValue = Map.of(1, "Amit",
-                                             2, "Ali",
-                                             3, "Mindorks");
-```
-
-#### Clojure
-
-```clojure
-(def list-of-number [1 2 3 4])
-
-(def key-value {1 "Amit" 
-                2 "Ali" 
-                3 "Mindorks"})
 ```
 
 ---
