@@ -1,5 +1,7 @@
 # From Java To Clojure
-Your Cheat Sheet For Clojurizing Java Syntax
+### Your Cheat Sheet For Porting Java to Clojure
+
+We'll start with basic tasks and dial up the complexity as the document progresses.
 
 ## Printing out
 
@@ -70,7 +72,7 @@ void doSomething() {
 ```
 
 #### Clojure
-Idiomatic Clojure naming uses an exclamation point suffix to denote that the function is impure (it "does something" elsewhere rather than returning a value). Use of side effects is minimized in the functional style.
+Idiomatic Clojure naming uses an exclamation point suffix to denote that the function is impure (it "does something" elsewhere in addition to returning a value). These are called side effects and their use is minimized in Clojure's default functional style.
 
 ```clojure
 (defn do-something! []
@@ -89,6 +91,7 @@ void doSomething(int... numbers) {
 ```
 
 #### Clojure
+`xs` here is idiomatic argument naming for multiple `x` values. The ampersand indicates a variable number of arguments follow, which are all bound to the name `xs`.
 
 ```clojure
 (defn do-something! [& xs]
@@ -113,7 +116,7 @@ Idiomatic functional naming usually elides "get-" prefixes:
 ```clojure
 (defn score []
   ;; logic here
-  ;; no need for a separate name to "return" because the last value just gets returned
+  ;; no need for a separate name to "return" because the last value gets returned automatically
   )
 ```
 
@@ -129,16 +132,9 @@ if (text != null) {
 ```
 
 #### Clojure
-It's somewhat unusual to conditionally define a var in Clojure because it's quite imperative. To be Clojure-idiomatic, we'd just inline it and omit the name `length`.
+Conditionally defining a var is quite imperative and therefore in Clojure it would be extremely rare and unusual. 
 
-So technically a straight port would be:
-```clojure
-(def length
-  (if (nil? text)
-    nil
-    (count text)))
-```
-...but something like this, inline in some other statement, is more likely:
+To be Clojure-idiomatic, omit the name `length`, inline the conditional in whatever other statement where it is needed, and use `when` to return `nil` if the predicate fails:
 ```clojure
 (when text
   (count text))
